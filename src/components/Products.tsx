@@ -1,10 +1,24 @@
+import { useEffect } from "react";
+import { AllProductsSlice } from "../slices/ProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
 
 
 const Products = () => {
 
+  const { loading ,error ,  AllProducts} = useSelector((state : RootState) => state?.mainproduct)
+  console.log('load| erro|allprod=',AllProducts);
+
+   const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+      dispatch(AllProductsSlice());
+  },[dispatch])
+
+
   return (
     <>
-    
+     <h3> Product Section  </h3>
     </>
     // <>
     //     <h3> Total Length is -{AllProducts?.length} </h3>
