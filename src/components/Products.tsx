@@ -19,7 +19,7 @@ const Products = () => {
 
   return (
     <>
-        <h3> Total Length is -{AllProducts?.length} </h3>
+        <h3> Total Length is -{filterproducts?.length} </h3>
      <div style = {{display: "grid" , gridTemplateColumns:'1fr 1fr', gap : '5px',fontSize:'24px' }}>
 
             {filterproducts && filterproducts?.map(i => 

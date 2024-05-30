@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useCallback, useState } from "react";
-import { filterbycategory, filterbycheckbox1, filterbydropdown } from "../slices/ProductSlice";
+import { ClearAll, filterbycategory, filterbycheckbox1, filterbycheckbox2, filterbycheckbox3, filterbydropdown } from "../slices/ProductSlice";
 
 
 const ProductFilter = () => {
@@ -34,8 +34,6 @@ const ProductFilter = () => {
   const [starcheckbox2,setstarcheckbox2] = useState<boolean>(false);
   const [starcheckbox3,setstarcheckbox3] = useState<boolean>(false);
 
-
-
   const dispatch  = useDispatch<AppDispatch>();
 
   const Checkbox1changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -53,12 +51,16 @@ const ProductFilter = () => {
     console.log('cehckboxv =',checkboxvalue2);
     console.log('newval =',val2);
      setstarcheckbox2(!starcheckbox2);
+     dispatch(filterbycheckbox2({val2,checkboxvalue2}));
   }
 
   const Checkbox3changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
     const val3  = e.target.value;
+    const checkbox3 = !starcheckbox3;
+    console.log('checkbox2 =',checkbox3);
     console.log('newval =',val3);
      setstarcheckbox3(!starcheckbox3);
+     dispatch(filterbycheckbox3({val3,checkbox3}));
   }
 
 
@@ -73,6 +75,11 @@ const ProductFilter = () => {
     console.log('newval =',pricerange);
     dispatch(filterbydropdown(pricerange))
   };
+
+  const clearAllFilters = () => {
+    console.log('clicked clear ');
+       dispatch(ClearAll());
+  }
 
   return (
     <div>
@@ -101,9 +108,7 @@ const ProductFilter = () => {
 
          <div>
           <input type = "checkbox"   id = "3star"  value = "3" 
-          // checked = {AllPrices.includes(value) ? true : false} 
           checked = {starcheckbox1}
-          // starcheckbox1  
           onChange={(e) => Checkbox1changehandler(e)} />
           <label> Less then  3 Stars </label>
          </div>
@@ -123,6 +128,11 @@ const ProductFilter = () => {
          </div>
          
       </div>
+
+        <div style = {{marginTop:'5%'}}>
+          <button onClick={() => clearAllFilters()}> Clear All </button>
+        </div>
+
     </div>
   )
 }

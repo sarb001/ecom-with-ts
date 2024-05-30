@@ -50,10 +50,34 @@ const ProductSlice = createSlice({
                  state.filterproducts = [...state.AllProducts].filter(i => 
                     i?.rating.toFixed() === val1
                  );
-                 console.log('state filterprod =',state.filterproducts);
+                 console.log(' checkbox 1 =',state.filterproducts);
                 }else{
                     state.filterproducts = state.AllProducts;
                 }
+          },
+
+          filterbycheckbox2:(state,action) => {
+            const { val2 , checkboxvalue2 } = action.payload;
+            if(checkboxvalue2 && val2 === '4'){
+                state.filterproducts = [...state.AllProducts].filter(i => 
+                   i?.rating.toFixed() === val2
+                );
+                console.log(' checkbox 2 =',state.filterproducts);
+               }else{
+                   state.filterproducts = state.AllProducts;
+               }
+          },
+
+          filterbycheckbox3:(state,action) => {
+            const { val3 , checkbox3 } = action.payload;
+            if(checkbox3 && val3 === '5'){
+                state.filterproducts = [...state.AllProducts].filter(i => 
+                   i?.rating.toFixed() === val3
+                );
+                console.log(' checkbox 3=',state.filterproducts);
+               }else{
+                   state.filterproducts = state.AllProducts;
+               }
           },
 
           filterbycategory : (state,action) => {
@@ -79,6 +103,10 @@ const ProductSlice = createSlice({
                     )
                 }
                 console.log('dropdown =',state.filterproducts);
+          },
+
+          ClearAll :(state) => {
+             state.filterproducts = state.AllProducts;
           }
 
     },
@@ -94,9 +122,9 @@ const ProductSlice = createSlice({
         .addCase(AllProductsSlice.rejected  , (state,action) => {
             state.loading = false;
             state.error = action.error?.message || null;
-        })
+    })
 })
 
 
-export const { filterbycheckbox1 ,filterbycategory ,filterbydropdown } = ProductSlice.actions;
+export const { filterbycheckbox1 ,filterbycategory ,filterbydropdown ,filterbycheckbox2 ,filterbycheckbox3 ,ClearAll } = ProductSlice.actions;
 export default ProductSlice.reducer;
