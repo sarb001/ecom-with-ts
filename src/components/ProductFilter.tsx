@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useCallback, useState } from "react";
-import { filterbycheckbox1 } from "../slices/ProductSlice";
+import { filterbycategory, filterbycheckbox1 } from "../slices/ProductSlice";
 
 
 const ProductFilter = () => {
@@ -34,8 +34,6 @@ const ProductFilter = () => {
   const [starcheckbox2,setstarcheckbox2] = useState<boolean>(false);
   const [starcheckbox3,setstarcheckbox3] = useState<boolean>(false);
 
-  
-
   const handleselectionchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
       const newval = e.target.value;
       console.log('newval =',newval);
@@ -67,6 +65,13 @@ const ProductFilter = () => {
   }
 
 
+  const handlecategory = (i:string) => {
+      const selectedcat = i;
+      console.log('newval =',selectedcat);
+      dispatch(filterbycategory(selectedcat))
+  }
+
+
   return (
     <div>
          <h3> Filter By Category </h3>
@@ -74,7 +79,7 @@ const ProductFilter = () => {
       {Uniquecategory?.map((i,index) => {
         return (
           <div key = {index}>
-             <button style = {{margin:'3% 5%'}}> {i} </button> 
+             <button  onClick={() => handlecategory(i)} style = {{margin:'3% 5%'}}> {i} </button> 
           </div>
         )
       })}

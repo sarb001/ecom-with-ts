@@ -54,7 +54,17 @@ const ProductSlice = createSlice({
                 }else{
                     state.filterproducts = state.AllProducts;
                 }
+          },
+
+          filterbycategory : (state,action) => {
+             const  selectedcat  = action.payload;
+             console.log('cat in slice =',selectedcat);
+             state.filterproducts = [...state.AllProducts].filter(i => 
+                i?.category === selectedcat                
+             )
+             console.log('cat= ',selectedcat);
           }
+
     },
     extraReducers : (builder) =>  builder
         .addCase(AllProductsSlice.pending   , (state) => {
@@ -72,5 +82,5 @@ const ProductSlice = createSlice({
 })
 
 
-export const { filterbycheckbox1 } = ProductSlice.actions;
+export const { filterbycheckbox1 ,filterbycategory } = ProductSlice.actions;
 export default ProductSlice.reducer;
