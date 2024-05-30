@@ -63,6 +63,22 @@ const ProductSlice = createSlice({
                 i?.category === selectedcat                
              )
              console.log('cat= ',selectedcat);
+          },
+
+          filterbydropdown : (state,action) => {
+              const pricerange = action.payload;
+              console.log('pricerange=',pricerange);
+
+                if(pricerange === 'lowest'){
+                  state.filterproducts = [...state.AllProducts].sort((a,b) => {
+                     return  a.price - b.price
+                    })
+                }else{
+                    state.filterproducts = [...state.AllProducts].sort((a,b) => 
+                        b.price - a.price
+                    )
+                }
+                console.log('dropdown =',state.filterproducts);
           }
 
     },
@@ -82,5 +98,5 @@ const ProductSlice = createSlice({
 })
 
 
-export const { filterbycheckbox1 ,filterbycategory } = ProductSlice.actions;
+export const { filterbycheckbox1 ,filterbycategory ,filterbydropdown } = ProductSlice.actions;
 export default ProductSlice.reducer;

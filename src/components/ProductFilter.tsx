@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useCallback, useState } from "react";
-import { filterbycategory, filterbycheckbox1 } from "../slices/ProductSlice";
+import { filterbycategory, filterbycheckbox1, filterbydropdown } from "../slices/ProductSlice";
 
 
 const ProductFilter = () => {
@@ -34,10 +34,7 @@ const ProductFilter = () => {
   const [starcheckbox2,setstarcheckbox2] = useState<boolean>(false);
   const [starcheckbox3,setstarcheckbox3] = useState<boolean>(false);
 
-  const handleselectionchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-      const newval = e.target.value;
-      console.log('newval =',newval);
-  };
+
 
   const dispatch  = useDispatch<AppDispatch>();
 
@@ -71,6 +68,11 @@ const ProductFilter = () => {
       dispatch(filterbycategory(selectedcat))
   }
 
+  const handleselectionchange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+    const pricerange = e.target.value;
+    console.log('newval =',pricerange);
+    dispatch(filterbydropdown(pricerange))
+  };
 
   return (
     <div>
