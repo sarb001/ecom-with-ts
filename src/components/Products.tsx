@@ -6,8 +6,8 @@ import { AppDispatch, RootState } from "../store/store";
 
 const Products = () => {
 
-  const { loading , error ,  AllProducts} = useSelector((state : RootState) => state?.mainproduct)
-  console.log('load| erro|allprod=',AllProducts);
+  const { loading , error ,  AllProducts ,filterproducts} = useSelector((state : RootState) => state?.mainproduct)
+  console.log('fil prod',filterproducts);
 
    const dispatch = useDispatch<AppDispatch>();
 
@@ -22,7 +22,7 @@ const Products = () => {
         <h3> Total Length is -{AllProducts?.length} </h3>
      <div style = {{display: "grid" , gridTemplateColumns:'1fr 1fr', gap : '5px',fontSize:'24px' }}>
 
-            {AllProducts && AllProducts?.map(i => 
+            {filterproducts && filterproducts?.map(i => 
                   <div key = {i?.id} className='card' 
                   style = {{backgroundColor:'lightgrey',padding:'2%',margin:'5% 1%' , width:'90%' , minHeight:'30vh'}}>
                   <div> {i?.id} {i?.title} </div>

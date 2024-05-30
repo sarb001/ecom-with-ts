@@ -15,13 +15,15 @@ type MyProducts = {
 type myinitialState = {
     loading : boolean,
     error: string | null,
-    AllProducts : MyProducts[]
+    AllProducts : MyProducts[],
+    filterproducts : MyProducts[]
 }
 
 const initialState:myinitialState = {
     loading: false,
     error : null,
-    AllProducts : []
+    AllProducts : [],
+    filterproducts : []
 }
 
 
@@ -39,7 +41,20 @@ const ProductSlice = createSlice({
     name : 'products',
     initialState,
     reducers:{
+          filterbycheckbox1: (state,action) => {
+             const { val1 , checkboxvalue } = action.payload;
+             console.log('val in slice =',val1);
+             console.log('checkbox in slice =',checkboxvalue);
 
+                if(checkboxvalue && val1 === '3'){
+                 state.filterproducts = [...state.AllProducts].filter(i => 
+                    i?.rating.toFixed() === val1
+                 );
+                 console.log('state filterprod =',state.filterproducts);
+                }else{
+                    state.filterproducts = state.AllProducts;
+                }
+          }
     },
     extraReducers : (builder) =>  builder
         .addCase(AllProductsSlice.pending   , (state) => {
@@ -48,6 +63,7 @@ const ProductSlice = createSlice({
         .addCase(AllProductsSlice.fulfilled , (state,action : PayloadAction<MyProducts[]>) => {
              state.loading = false;
              state.AllProducts = action.payload;
+             state.filterproducts = action.payload;
         })
         .addCase(AllProductsSlice.rejected  , (state,action) => {
             state.loading = false;
@@ -56,4 +72,5 @@ const ProductSlice = createSlice({
 })
 
 
+export const { filterbycheckbox1 } = ProductSlice.actions;
 export default ProductSlice.reducer;
