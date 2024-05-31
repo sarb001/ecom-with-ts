@@ -8,7 +8,7 @@ type MyProducts = {
     title : string,
     category : string,
     price : number,
-    images : "",
+    images : string,
     rating : number,
 }
 
@@ -43,17 +43,17 @@ const ProductSlice = createSlice({
     reducers:{
 
          filtercheckbox : (state,action) => {
-                const { value , checked } = action.payload;
-                console.log('filtercheck =',{value,checked});
+                    const { value , checked } = action.payload;
+                    console.log('filtercheck =',{value,checked});
 
-                if(checked){        
-                    state.filterproducts = [...state.AllProducts].filter(i =>
-                        i?.rating.toFixed() === value
-                    )
-                }else{
-                    state.filterproducts = state.AllProducts;
-                }
-                console.log('filtercheckboc ==',state.filterproducts);
+                    if(checked){        
+                        state.filterproducts = [...state.AllProducts].filter(i =>
+                            i?.rating.toFixed() === value
+                        )
+                    }else{
+                        state.filterproducts = state.AllProducts;
+                    }
+                    console.log('filtercheckboc ==',state.filterproducts);
          },
 
           filterbycategory : (state,action) => {

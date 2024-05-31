@@ -2,12 +2,16 @@ import { useEffect } from "react";
 import { AllProductsSlice } from "../slices/ProductSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
+import { AddinginCart, cartType } from "../slices/CartSlice";
+import { ItemsinCart } from "../utils/ItemsinCart";
 
 
 const Products = () => {
 
-  const { loading , error ,  AllProducts ,filterproducts} = useSelector((state : RootState) => state?.mainproduct)
+  const { loading , filterproducts} = useSelector((state : RootState) => state?.mainproduct)
   console.log('fil prod',filterproducts);
+
+  const { cart } = useSelector((state : RootState) => state?.cart);
 
    const dispatch = useDispatch<AppDispatch>();
 
@@ -16,6 +20,18 @@ const Products = () => {
   },[dispatch])
 
    if(loading) return <h2> Loading...... </h2>
+
+   
+   const addtocart = (product:cartType) => {
+        const checkexists = ItemsinCart({cart,product});
+        console.log('exists =',checkexists); 
+
+        if(checkexists){        // true so existing
+          console.log('Alreday Present ');
+        }else{
+          dispatch(AddinginCart(product));
+        }
+   }
 
   return (
     <>
@@ -33,7 +49,13 @@ const Products = () => {
                       <div> {i?.category} Only </div> 
                       <div> Price -  Rs.{i?.price.toFixed()} </div>
                       <div> Rating - {i?.rating.toFixed()} Star </div>
-                      </div>
+                    </div>
+                    <div>
+                       <button 
+                        onClick={() => addtocart(i)}
+                       style = {{padding:'3%',backgroundColor:'lightsalmon'}}> 
+                       Add to Cart </button>
+                    </div>
                   </div>
             )}
           
