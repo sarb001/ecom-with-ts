@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useCallback, useState } from "react";
-import { ClearAll, filterbycategory, filterbycheckbox1, filterbycheckbox2, filterbycheckbox3, filterbydropdown } from "../slices/ProductSlice";
+import { ClearAll, filterbycategory, filterbycheckbox1, filterbycheckbox2, filterbycheckbox3, filterbydropdown, filtercheckbox } from "../slices/ProductSlice";
 
 
 const ProductFilter = () => {
@@ -36,33 +36,52 @@ const ProductFilter = () => {
 
   const dispatch  = useDispatch<AppDispatch>();
 
-  const Checkbox1changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-     const val1  = e.target.value;
-     const checkboxvalue = !starcheckbox1;
-     console.log('cehckboxv =',checkboxvalue);
-     console.log('newval =',val1);
-     setstarcheckbox1(!starcheckbox1);
-     dispatch(filterbycheckbox1({val1,checkboxvalue}));
-  }
+  // const Checkbox1changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+  //    const val1  = e.target.value;
+  //    const checkboxvalue = !starcheckbox1;
+  //    console.log('cehckboxv =',checkboxvalue);
+  //    console.log('newval =',val1);
+  //    setstarcheckbox1(!starcheckbox1);
+  //    dispatch(filterbycheckbox1({val1,checkboxvalue}));
+  // }
 
-  const Checkbox2changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const val2  = e.target.value;
-    const checkboxvalue2 = !starcheckbox2;
-    console.log('cehckboxv =',checkboxvalue2);
-    console.log('newval =',val2);
-     setstarcheckbox2(!starcheckbox2);
-     dispatch(filterbycheckbox2({val2,checkboxvalue2}));
-  }
+  // const Checkbox2changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+  //   const val2  = e.target.value;
+  //   const checkboxvalue2 = !starcheckbox2;
+  //   console.log('cehckboxv =',checkboxvalue2);
+  //   console.log('newval =',val2);
+  //    setstarcheckbox2(!starcheckbox2);
+  //    dispatch(filterbycheckbox2({val2,checkboxvalue2}));
+  // }
 
-  const Checkbox3changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const val3  = e.target.value;
-    const checkbox3 = !starcheckbox3;
-    console.log('checkbox2 =',checkbox3);
-    console.log('newval =',val3);
-     setstarcheckbox3(!starcheckbox3);
-     dispatch(filterbycheckbox3({val3,checkbox3}));
-  }
+  // const Checkbox3changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+  //   const val3  = e.target.value;
+  //   const checkbox3 = !starcheckbox3;
+  //   console.log('checkbox2 =',checkbox3);
+  //   console.log('newval =',val3);
+  //    setstarcheckbox3(!starcheckbox3);
+  //    dispatch(filterbycheckbox3({val3,checkbox3}));
+  // }
 
+   const [checkboxstate,setcheckboxstate] = useState({
+       starcheckbox1 : false,
+       starcheckbox2 : false,
+       starcheckbox3 : false,
+   });
+
+   const checkboxhandler = (e:React.ChangeEvent<HTMLInputElement>) => {
+          const { id , value ,checked } = e.target;
+          console.log('checked==',{ id , value ,checked });   // checked is boolean true | false
+
+        // id - starcheckbox1  || startcheckbox2
+        // value = '3'
+
+        setcheckboxstate(prev =>  ({
+          ...prev,
+          [id] :checked
+        }))
+         dispatch(filtercheckbox({value,checked}));
+   }
 
   const handlecategory = (i:string) => {
       const selectedcat = i;
@@ -103,7 +122,7 @@ const ProductFilter = () => {
          </select>
       </div>
 
-      <h3> Filter by Rating  </h3>
+      {/* <h3> Filter by Rating  </h3>
       <div>
 
          <div>
@@ -124,6 +143,36 @@ const ProductFilter = () => {
           <input type = "checkbox"  id = "5star"   value = "5"  
            checked = {starcheckbox3}
           onChange={(e) => Checkbox3changehandler(e)} />
+          <label> 5 Star </label>
+         </div>
+         
+      </div> */}
+
+
+         <h3> Filter by Rating  </h3>
+      <div>
+
+         <div>
+            <input type = "checkbox"   
+            id = "starcheckbox1"  value = "3" 
+            checked = {checkboxstate.starcheckbox1}
+            onChange={checkboxhandler} />
+            <label> Less then  3 Stars </label>
+         </div>
+
+         <div> 
+            <input type = "checkbox"  
+            id = "starcheckbox2"   value = "4"  
+            checked = {checkboxstate.starcheckbox2}
+            onChange={checkboxhandler} />
+            <label> 4 Stars </label>
+         </div>
+
+         <div>
+          <input type = "checkbox"  
+           id = "starcheckbox3"   value = "5"  
+           checked = {checkboxstate.starcheckbox3}
+           onChange={checkboxhandler} />
           <label> 5 Star </label>
          </div>
          

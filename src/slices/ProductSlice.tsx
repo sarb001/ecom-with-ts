@@ -41,10 +41,27 @@ const ProductSlice = createSlice({
     name : 'products',
     initialState,
     reducers:{
+
+         filtercheckbox : (state,action) => {
+                const { value , checked } = action.payload;
+                console.log('filtercheck =',{value,checked});
+
+                if(checked){        
+                    state.filterproducts = [...state.AllProducts].filter(i =>
+                        i?.rating.toFixed() === value
+                    )
+                }else{
+                    state.filterproducts = state.AllProducts;
+                }
+                console.log('filtercheckboc ==',state.filterproducts);
+         },
+
           filterbycheckbox1: (state,action) => {
              const { val1 , checkboxvalue } = action.payload;
              console.log('val in slice =',val1);
-             console.log('checkbox in slice =',checkboxvalue);
+             console.log('checkbox in slice =',checkboxvalue);      
+
+                    // if checkbox is true |  value = '3'| '4' | '5'
 
                 if(checkboxvalue && val1 === '3'){
                  state.filterproducts = [...state.AllProducts].filter(i => 
@@ -126,5 +143,5 @@ const ProductSlice = createSlice({
 })
 
 
-export const { filterbycheckbox1 ,filterbycategory ,filterbydropdown ,filterbycheckbox2 ,filterbycheckbox3 ,ClearAll } = ProductSlice.actions;
+export const { filterbycheckbox1 ,filterbycategory ,filtercheckbox ,filterbydropdown ,filterbycheckbox2 ,filterbycheckbox3 ,ClearAll } = ProductSlice.actions;
 export default ProductSlice.reducer;
