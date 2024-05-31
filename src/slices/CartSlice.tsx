@@ -11,8 +11,7 @@ export type cartType = {
 }
 
 export  type initialState = {
-     cart : cartType[] 
-     TotalQuantity : number,
+     cart : cartType[]
      productquantity : number,
      Totalamount : number,
      AddinginCart : (id: string,
@@ -24,7 +23,6 @@ export  type initialState = {
 
 const initialState:initialState = {
     cart : [],
-    TotalQuantity : 0,
     productquantity :1,
     Totalamount : 0,
     AddinginCart : () => {},
@@ -36,9 +34,14 @@ const CartSlice = createSlice({
      initialState,
      reducers : {
         AddinginCart : (state,action:PayloadAction<cartType>) => {
-                console.log('product in slice is =');
-                 state.cart?.push(action.payload);
-                 state.productquantity = 1;
+                 console.log('product in slice is =');
+                 const newdata = {
+                     ...state.cart, 
+                     ...action.payload,
+                     productquantity : 1
+                    }
+                
+                 state.cart?.push(newdata);
         },
 
         RemovefromCart : (state,action) => {
