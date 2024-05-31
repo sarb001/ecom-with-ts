@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store";
 import { useCallback, useState } from "react";
-import { ClearAll, filterbycategory, filterbycheckbox1, filterbycheckbox2, filterbycheckbox3, filterbydropdown, filtercheckbox } from "../slices/ProductSlice";
+import { ClearAll, filterbycategory , filterbydropdown, filtercheckbox } from "../slices/ProductSlice";
 
 
 const ProductFilter = () => {
@@ -21,48 +21,7 @@ const ProductFilter = () => {
   const AllRating = AllProducts.map(i => i?.rating.toFixed());
   console.log('AllRating =',AllRating);        // 3,4,5
 
-  //  Price   - slide ------
-  //  Rating  - checkbox[]
-
-//  const inputchangehandler = useCallback((e:React.ChangeEvent<HTMLInputElement>) => {
-//    setPrice(e.target.value);
-//  },[Price]);
-
-  const [pricevalue,setpricevalue] = useState(0);
-
-  const [starcheckbox1,setstarcheckbox1] = useState<boolean>(false);
-  const [starcheckbox2,setstarcheckbox2] = useState<boolean>(false);
-  const [starcheckbox3,setstarcheckbox3] = useState<boolean>(false);
-
-  const dispatch  = useDispatch<AppDispatch>();
-
-  // const Checkbox1changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-  //    const val1  = e.target.value;
-  //    const checkboxvalue = !starcheckbox1;
-  //    console.log('cehckboxv =',checkboxvalue);
-  //    console.log('newval =',val1);
-  //    setstarcheckbox1(!starcheckbox1);
-  //    dispatch(filterbycheckbox1({val1,checkboxvalue}));
-  // }
-
-  // const Checkbox2changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-  //   const val2  = e.target.value;
-  //   const checkboxvalue2 = !starcheckbox2;
-  //   console.log('cehckboxv =',checkboxvalue2);
-  //   console.log('newval =',val2);
-  //    setstarcheckbox2(!starcheckbox2);
-  //    dispatch(filterbycheckbox2({val2,checkboxvalue2}));
-  // }
-
-  // const Checkbox3changehandler = (e:React.ChangeEvent<HTMLInputElement>) => {
-  //   const val3  = e.target.value;
-  //   const checkbox3 = !starcheckbox3;
-  //   console.log('checkbox2 =',checkbox3);
-  //   console.log('newval =',val3);
-  //    setstarcheckbox3(!starcheckbox3);
-  //    dispatch(filterbycheckbox3({val3,checkbox3}));
-  // }
-
+   const dispatch  = useDispatch<AppDispatch>();
    const [checkboxstate,setcheckboxstate] = useState({
        starcheckbox1 : false,
        starcheckbox2 : false,

@@ -56,47 +56,6 @@ const ProductSlice = createSlice({
                 console.log('filtercheckboc ==',state.filterproducts);
          },
 
-          filterbycheckbox1: (state,action) => {
-             const { val1 , checkboxvalue } = action.payload;
-             console.log('val in slice =',val1);
-             console.log('checkbox in slice =',checkboxvalue);      
-
-                    // if checkbox is true |  value = '3'| '4' | '5'
-
-                if(checkboxvalue && val1 === '3'){
-                 state.filterproducts = [...state.AllProducts].filter(i => 
-                    i?.rating.toFixed() === val1
-                 );
-                 console.log(' checkbox 1 =',state.filterproducts);
-                }else{
-                    state.filterproducts = state.AllProducts;
-                }
-          },
-
-          filterbycheckbox2:(state,action) => {
-            const { val2 , checkboxvalue2 } = action.payload;
-            if(checkboxvalue2 && val2 === '4'){
-                state.filterproducts = [...state.AllProducts].filter(i => 
-                   i?.rating.toFixed() === val2
-                );
-                console.log(' checkbox 2 =',state.filterproducts);
-               }else{
-                   state.filterproducts = state.AllProducts;
-               }
-          },
-
-          filterbycheckbox3:(state,action) => {
-            const { val3 , checkbox3 } = action.payload;
-            if(checkbox3 && val3 === '5'){
-                state.filterproducts = [...state.AllProducts].filter(i => 
-                   i?.rating.toFixed() === val3
-                );
-                console.log(' checkbox 3=',state.filterproducts);
-               }else{
-                   state.filterproducts = state.AllProducts;
-               }
-          },
-
           filterbycategory : (state,action) => {
              const  selectedcat  = action.payload;
              console.log('cat in slice =',selectedcat);
@@ -143,5 +102,5 @@ const ProductSlice = createSlice({
 })
 
 
-export const { filterbycheckbox1 ,filterbycategory ,filtercheckbox ,filterbydropdown ,filterbycheckbox2 ,filterbycheckbox3 ,ClearAll } = ProductSlice.actions;
+export const { filterbycategory ,filtercheckbox ,filterbydropdown  , ClearAll } = ProductSlice.actions;
 export default ProductSlice.reducer;
