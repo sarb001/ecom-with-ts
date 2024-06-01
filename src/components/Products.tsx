@@ -11,7 +11,7 @@ const Products = () => {
   const { loading , filterproducts} = useSelector((state : RootState) => state?.mainproduct)
   console.log('fil prod',filterproducts);
 
-   const { cart } = useSelector((state : RootState) => state?.cart);
+  const { cart } = useSelector((state : RootState) => state?.cart);
    const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {

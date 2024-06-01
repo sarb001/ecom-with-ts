@@ -7,7 +7,7 @@ export type cartType = {
     price : number,
     images : string,
     rating : number,
-    productquantity : number,
+    productquantity? : number,
 }
 
 export  type initialState = {
